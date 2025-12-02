@@ -58,8 +58,9 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     //check for image, check for avtar ----------done
-    const avtarLocalPath = req.files?.avtar[0]?.path;
-    
+    // Use optional chaining on both req.files and the avtar array to avoid runtime TypeError
+    const avtarLocalPath = req.files?.avtar?.[0]?.path;
+
     if (!avtarLocalPath) {
         throw new ApiError(400, 'avtar image is required')
     }
